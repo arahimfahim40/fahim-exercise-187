@@ -1,0 +1,85 @@
+/* Created by: Abdul Rahim
+ * Date of creation: 12/02/2020
+ * Course: CPT 187
+ * Purpose: The purpose of this Write Order
+ * object to write a receipt for the order
+ * and does the processing work for it.
+ * */
+
+package edu.cpt187.fahim.exercise6;
+
+//import classes needed for appending and writing files
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+//class
+public class WriteOrder 
+{
+	//variables non-constants
+	//file found flag
+	private boolean fileFoundFlag = false;
+	//master file name
+	private String masterFileName = "";
+	//record count
+	private int recordCount = 0;
+	
+	//constructor
+	public WriteOrder(String borrowedFileName)
+	{
+		//assigning master file name
+		masterFileName = borrowedFileName;
+	}//end of constructor
+	
+	//setters method
+	//set write order method
+	public void setWriteOrder(int borrowedItemID, String borrowedItemName, double borrowedItemPrice, int borrowedQuantitiy, double borrowedOrderCost) 
+	{
+		//try statement
+		try 
+		{
+			//instantiation statement to open the file
+			PrintWriter filePW = new PrintWriter(new FileWriter(masterFileName, true));
+			//write to the file
+			filePW.printf("%d\t%s\t%.2f\t%d\t%.2f%n",borrowedItemID, borrowedItemName,borrowedItemPrice,borrowedQuantitiy,borrowedOrderCost);
+			//set file found flag to true
+			fileFoundFlag = true;
+			//close the print writer
+			filePW.close();
+			//incrementing record count
+			recordCount++;
+		}//end of try statement
+		//catch
+		catch(IOException ex) 
+		{
+			//set the flag to not found
+			fileFoundFlag = false;
+		}//end of catch
+
+		
+	}//end of method
+	
+	//getters method
+	//get file found flag
+	public boolean getFileFoundFlag() 
+	{
+		//return
+		return fileFoundFlag;
+	}//end of method
+	
+	//get file name method
+	public String getFileName() 
+	{
+		//return 
+		return masterFileName;
+	}//end of method
+	
+	//get record count method
+	public int getRecordCount() 
+	{
+		//return
+		return recordCount;
+	}//end of method
+	
+	
+}//end of class
