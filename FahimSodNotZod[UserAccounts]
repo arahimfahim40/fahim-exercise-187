@@ -1,0 +1,223 @@
+/* Created by: Abdul Rahim
+ * Date of creation: 12/02/2020
+ * Course: CPT 187
+ * Purpose: The purpose of this Order object is 
+ * to hold information regarding the order such 
+ * as the discount type, tax, and others. And
+ * provide the tools to print a receipt and
+ * it will calculation everything else automatically.
+ * */
+
+package edu.cpt187.fahim.exercise6;
+
+//Creation of Class Order
+public class Order 
+{
+	//declare and initialize tax rate variable
+	private final double TAX_RATE = 0.075;
+	
+	//variables
+	//discount type non-constant
+	private int discountType = 0;
+	//itemID
+	private int itemID = 0;
+	//declaring and initializing item name
+	private String itemName = "";
+	//declaring and initializing item price
+	private double itemPrice = 0.0;
+	//declaring and initializing discount name
+	private String discountName = "";
+	//declaring and initializing discount rate
+	private double discountRate = 0.0;
+	//declaring and initializing how many
+	private int howMany = 0;
+	//declaring and initializing last item selected
+	private int lastItemSelectedIndex = 0;
+	//declare and initialize prize name
+	private String prizeName = "";
+
+
+	
+	//constructor
+	public Order () 
+	{	
+		
+	}//end of constructor
+	
+	//setters method
+	//setItemSelection setter method to assign borrowedMenuSelection to itemSelection
+	public void setLastItemSelectedIndex(int borrowedSearchIndex) 
+	{
+		//set itemSelection to borrowedMenuSelection
+		lastItemSelectedIndex = borrowedSearchIndex;
+	}//end of setItemSelection method
+	
+	//set itemID method
+	public void setItemID(int[] borrowedItemIDs) 
+	{
+		//assigning itemID
+		itemID = borrowedItemIDs[lastItemSelectedIndex];
+	}//end of method
+	
+	//setItemName method to assign ITEM_NAMES to itemName
+	public void setItemName(String[] borrowedItemNames) 
+	{
+		//assigning itemNam
+		itemName = borrowedItemNames[lastItemSelectedIndex];
+	}//end of setItemName method
+	
+	//setItemPrice method to assign ITEM_PRICES to itemPrice
+	public void setItemPrice(double[] borrowedItemPrices) 
+	{
+		//assign item price the ITEM_PRICES value
+		itemPrice = borrowedItemPrices[lastItemSelectedIndex];
+	}//end of setItemPrice method
+	
+	//setHowMany method to assign howMany to borrowedHowMany
+	public void setHowMany(String borrowedHowMany) 
+	{
+		//converting the borrowed value to integer
+		//assigning borrowedHowMany variable to howMany
+		howMany = Integer.parseInt(borrowedHowMany);
+	}//End of setHowMany
+	
+	//setDiscountType void method to assign discountType borrowedMenuSelection
+	public void setDiscountType(char borrowedMenuSelection) 
+	{
+		//assigning discountType borrowedMenuSelection value
+		discountType = borrowedMenuSelection - 'A';
+	}//end of setDiscount Type method
+	
+	//setDiscountName method to assign DISCOUNT_NAMES to discount name 
+	//and increment discountCounts
+	public void setDiscountName(String[] borrowedDiscountNames) 
+	{
+		//assign and discountName and increment discount counts
+		discountName = borrowedDiscountNames[discountType];
+	}//end of setDiscountName method
+	
+	//setDiscountRate method  to assign the DISCOUNT_RATES to discountRate
+	public void setDiscountRate (double[] borrowedDiscountRate) 
+	{
+		//assign disocuntRate 
+		discountRate = borrowedDiscountRate[discountType];
+	}//end of setDiscountRate method
+	
+	//setPrizeName method
+	public void setPrizeName(String[] borrowedPrizeNames, int borrowedPrizeIndex) 
+	{
+
+		//assigning borrowedPrizeNames to prizeName
+		prizeName = borrowedPrizeNames[borrowedPrizeIndex];
+	}//end of method
+	
+	//setDecrease method
+	public void setDecreaseInStock(Inventory borrowedInventoryObject) 
+	{
+		borrowedInventoryObject.setReduceStock(howMany);
+	}//end of method
+	
+	//getter methods
+	
+	//get item id method
+	public int getItemID() 
+	{
+		//return
+		return itemID;
+	}//end of method
+	
+	//get in stock count
+	public int getInStockCount(int[] borrowedInStockCounts) 
+	{
+		 //return in stock count
+		return borrowedInStockCounts[lastItemSelectedIndex];
+	}//end of method
+	
+	//getItemName method
+	public String getItemName() 
+	{
+		//return itemName
+		return itemName;
+	}//end of getItemName method
+	
+	//getItemPrice() method
+	public double getItemPrice() 
+	{
+		//return itemPrice
+		return itemPrice;
+	}//end of getItemPrice()
+	
+	//getHowMany() method
+	public int getHowMany() 
+	{
+		//return howMany
+		return howMany;
+	}//end of getHowMany method
+	
+	//getDiscountName method
+	public String getDiscountName() 
+	{
+		//return discount name
+		return discountName;
+	}//end of method
+	
+	//getDiscountRate method
+	public double getDiscountRate()
+	{
+		//return discount rate
+		return discountRate;
+	}//end of method
+	
+	//start of getDiscountAmt method
+	public double getDiscountAmt() 
+	{
+		//return calculation
+		return (itemPrice * discountRate);
+	}//end of getDiscountAmt method
+	
+	//start of getDiscountPrice
+	public double getDiscountPrice() 
+	{
+		//return calc
+		return (itemPrice- getDiscountAmt());
+	}//end of getDiscountPrice
+	
+	//start of getSubTotal
+	public double getSubTotal() 
+	{
+		//return subtotal
+		return (getDiscountPrice() * howMany);
+	}//end of get subtotal
+	
+	//start of getTaxRate
+	public double getTaxRate() 
+	{
+		//return tax rate
+		return(TAX_RATE);
+	}//end of tax rate method
+	
+	//start of getTaxAmt method
+	public double getTaxAmt () 
+	{
+		//return tax amount
+		return (TAX_RATE * getSubTotal());
+	}//end of tax amount
+	
+	//start of get total cost method
+	public double getTotalCost() 
+	{
+		//return total cost
+		return (getSubTotal() + getTaxAmt());
+	}//end of method
+	
+
+	//start of get prize name method
+	public String getPrizeName() 
+	{
+		//return prize name
+		return prizeName;
+	}//end of method
+	
+	
+	
+}//end of class
